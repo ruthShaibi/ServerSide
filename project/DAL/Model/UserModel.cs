@@ -30,18 +30,30 @@ namespace DAL.Model
         {
             using (HOMEntities db = new HOMEntities())
             {
-                return db.users.Any(x => x.Id == id);
+                if(db.users.Any(x => x.Id == id))
+                return false;
+                return true;
             }
         }
         public bool IsValidId(string id)
         {
-            char[] ch = id.ToCharArray(), check = { '1', '2', '1', '2', '1', '2', '1', '2', '1' };
-            int intId = int.Parse(id);
+            int[] intId = new int[9], check = {1,2,1,2,1,2,1,2,1};
+            for (int i = 0; i < id.Length; i++)
+            {
+                intId[i] = id[i] - '0';
+            }
+
+           // char[] ch = id.ToCharArray(), check = { '1','2','1','2','1','2','1','2','1'};
+          //  int intId = int.Parse(id);
             int index = 0, sum = 0, temp = 0, subSum = 0;
             int[] arr = new int[9];
-            for (int i = 0; i < ch.Length; i++)
+            //for (int i = 0; i < ch.Length; i++)
+            //{
+            //    arr[index++] = (ch[i]-'0') * (check[i]-'0');
+            //}
+            for (int i = 0; i < intId.Length; i++)
             {
-                arr[index++] = (ch[i] - '0') * (check[i] - '0');
+                arr[index++] = intId[i]  *check[i] ;
             }
 
             for (int j = 0; j < arr.Length; j++)
@@ -82,7 +94,7 @@ namespace DAL.Model
         public bool Validation(user user)
         {
             return IsValidPhone(user.Phone) && IsValidPhone(user.Mobile_Phone) &&
-               IsValidDate(user.Birth_Date) && IsValidId(user.Id);
+               IsValidDate(user.Birth_Date) && IsValidId(user.Id) && IsExist(user.Id);
         }
 
         public user Post(user user)
