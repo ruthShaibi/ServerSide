@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HOMModelStoreContainer" CdmEntityContainer="HOMEntities">
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="HOMModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user">
+      <EntityTypeMapping TypeName="HOMModel.user">
+        <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CureDate" ColumnName="CureDate" />
+          <ScalarProperty Name="PositiveResultDate" ColumnName="PositiveResultDate" />
+          <ScalarProperty Name="Mobile_Phone" ColumnName="Mobile_Phone" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Birth_Date" ColumnName="Birth_Date" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vaccination">
+      <EntityTypeMapping TypeName="HOMModel.Vaccination">
+        <MappingFragment StoreEntitySet="Vaccination">
+          <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VaccinationDate">
+      <EntityTypeMapping TypeName="HOMModel.VaccinationDate">
+        <MappingFragment StoreEntitySet="VaccinationDate">
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="ReciveDate" ColumnName="ReciveDate" />
+          <ScalarProperty Name="VaccinationId" ColumnName="VaccinationId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

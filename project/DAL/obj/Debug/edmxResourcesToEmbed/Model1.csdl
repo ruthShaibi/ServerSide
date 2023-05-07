@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HOMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="HOMEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="HOMModel.sysdiagrams" />
+    <EntitySet Name="user" EntityType="HOMModel.user" />
+    <EntitySet Name="Vaccination" EntityType="HOMModel.Vaccination" />
+    <EntitySet Name="VaccinationDate" EntityType="HOMModel.VaccinationDate" />
+    <AssociationSet Name="FK_VaccinationDate_user" Association="HOMModel.FK_VaccinationDate_user">
+      <End Role="user" EntitySet="user" />
+      <End Role="VaccinationDate" EntitySet="VaccinationDate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VaccinationDate_Vaccination" Association="HOMModel.FK_VaccinationDate_Vaccination">
+      <End Role="Vaccination" EntitySet="Vaccination" />
+      <End Role="VaccinationDate" EntitySet="VaccinationDate" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Birth_Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Mobile_Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="PositiveResultDate" Type="DateTime" Precision="0" />
+    <Property Name="CureDate" Type="DateTime" Precision="0" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="VaccinationDate" Relationship="HOMModel.FK_VaccinationDate_user" FromRole="user" ToRole="VaccinationDate" />
+  </EntityType>
+  <EntityType Name="Vaccination">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="Manufacturer" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="VaccinationDate" Relationship="HOMModel.FK_VaccinationDate_Vaccination" FromRole="Vaccination" ToRole="VaccinationDate" />
+  </EntityType>
+  <EntityType Name="VaccinationDate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="VaccinationId" Type="Int32" Nullable="false" />
+    <Property Name="ReciveDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Number" Type="Int32" />
+    <NavigationProperty Name="user" Relationship="HOMModel.FK_VaccinationDate_user" FromRole="VaccinationDate" ToRole="user" />
+    <NavigationProperty Name="Vaccination" Relationship="HOMModel.FK_VaccinationDate_Vaccination" FromRole="VaccinationDate" ToRole="Vaccination" />
+  </EntityType>
+  <Association Name="FK_VaccinationDate_user">
+    <End Type="HOMModel.user" Role="user" Multiplicity="1" />
+    <End Type="HOMModel.VaccinationDate" Role="VaccinationDate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VaccinationDate">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VaccinationDate_Vaccination">
+    <End Type="HOMModel.Vaccination" Role="Vaccination" Multiplicity="1" />
+    <End Type="HOMModel.VaccinationDate" Role="VaccinationDate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vaccination">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VaccinationDate">
+        <PropertyRef Name="VaccinationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

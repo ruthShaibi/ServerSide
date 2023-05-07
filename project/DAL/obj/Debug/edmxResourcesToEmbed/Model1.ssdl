@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HOMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="Address" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="Birth_Date" Type="date" Nullable="false" />
+    <Property Name="Phone" Type="nchar" MaxLength="10" />
+    <Property Name="Mobile_Phone" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="PositiveResultDate" Type="date" />
+    <Property Name="CureDate" Type="date" />
+    <Property Name="Status" Type="int" />
+  </EntityType>
+  <EntityType Name="Vaccination">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="15" Nullable="false" />
+    <Property Name="Manufacturer" Type="nchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VaccinationDate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="VaccinationId" Type="int" Nullable="false" />
+    <Property Name="ReciveDate" Type="date" Nullable="false" />
+    <Property Name="Number" Type="int" />
+  </EntityType>
+  <Association Name="FK_VaccinationDate_user">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="VaccinationDate" Type="Self.VaccinationDate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VaccinationDate">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VaccinationDate_Vaccination">
+    <End Role="Vaccination" Type="Self.Vaccination" Multiplicity="1" />
+    <End Role="VaccinationDate" Type="Self.VaccinationDate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vaccination">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VaccinationDate">
+        <PropertyRef Name="VaccinationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="HOMModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vaccination" EntityType="Self.Vaccination" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VaccinationDate" EntityType="Self.VaccinationDate" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_VaccinationDate_user" Association="Self.FK_VaccinationDate_user">
+      <End Role="user" EntitySet="user" />
+      <End Role="VaccinationDate" EntitySet="VaccinationDate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VaccinationDate_Vaccination" Association="Self.FK_VaccinationDate_Vaccination">
+      <End Role="Vaccination" EntitySet="Vaccination" />
+      <End Role="VaccinationDate" EntitySet="VaccinationDate" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
