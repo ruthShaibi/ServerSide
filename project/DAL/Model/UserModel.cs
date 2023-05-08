@@ -74,7 +74,7 @@ namespace DAL.Model
                     sum += arr[j];
                 }
             }
-            if (sum % 10 != 0)
+            if (sum % 10 != 0 || sum==0)
                 return false;
             return true;
 
