@@ -19,6 +19,16 @@ namespace WebApi.Controllers
         {
             return service.Get(id);
         }
+        [Route("~/api/Vaccination/GetByName/{name}")]
+        public DTO.VaccinationDTO GetByName(string name)
+        {
+            return service.GetByName(name);
+        }
+        [Route("~/api/Vaccination/GetByManufacturer/{mfct}")]
+        public List<DTO.VaccinationDTO> GetByManufacturer(string mfct)
+        {
+            return service.GetByManufacturer(mfct);
+        }
         [HttpPost]
         public IHttpActionResult Post(VaccinationDTO VaccinationDTO)
         {

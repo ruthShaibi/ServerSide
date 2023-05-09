@@ -17,15 +17,16 @@ namespace WebApi.Controllers
             return service.Get();
         }
         [Route("~/api/VaccinationDate/GetByUserId/{id}")]
-        public DTO.VaccinationDateDTO GetByUserId(string id)
+        public List<DTO.VaccinationDateDTO> GetByUserId(string id)
         {
             return service.GetByUserId(id);
         }
         [Route("~/api/VaccinationDate/GetByVaccinationId/{id}")]
-        public DTO.VaccinationDateDTO GetByVaccinationId(string id)
+        public List<DTO.VaccinationDateDTO> GetByVaccinationId(int id)
         {
             return service.GetByVaccinationId(id);
         }
+
         [HttpPost]
         public IHttpActionResult Post(VaccinationDateDTO VaccinationDateDTO)
         {

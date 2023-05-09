@@ -11,15 +11,24 @@ namespace WebApi.Controllers
     {
         BLL.UserService service= new BLL.UserService();
         [HttpGet]
-        [Route("~/api/user/GetUser")]
+       [Route("~/api/user/GetUser")]
         public List<DTO.UserDTO> Get()
         {
             return service.Get();
         }
-        public DTO.UserDTO Get(string id)
+        
+        [Route("~/api/user/GetById/{id}")]
+        public DTO.UserDTO GetById(string id)
         {
-            return service.Get(id);
+            return service.GetById(id);
         }
+        [Route("~/api/user/GetByMobilePhone/{phone}")]
+        public List<DTO.UserDTO> GetByMobilePhone(string phone)
+        {
+            return service.GetByMobilePhone(phone);
+        }
+
+
         [HttpPost]
         public IHttpActionResult Post(UserDTO userDTO)
         {
@@ -34,6 +43,13 @@ namespace WebApi.Controllers
                 return BadRequest(e.Message);
             }
 
+        }
+        [HttpPut]
+
+        [Route("~/api/user/Put")]
+        public DTO.UserDTO Put(UserDTO user)
+        {
+            return service.Put(user);
         }
     }
 }

@@ -15,11 +15,11 @@ namespace BLL
         {
             return Convert.VaccinationDateConvert.Convert(model.Get());
         }
-        public DTO.VaccinationDateDTO GetByUserId(string id)
+        public List<DTO.VaccinationDateDTO> GetByUserId(string id)
         {
             return Convert.VaccinationDateConvert.Convert(model.GetByUserId(id));
         }
-        public DTO.VaccinationDateDTO GetByVaccinationId(string id)
+        public List<DTO.VaccinationDateDTO> GetByVaccinationId(int id)
         {
             return Convert.VaccinationDateConvert.Convert(model.GetByVaccinationId(id));
         }

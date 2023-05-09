@@ -19,11 +19,18 @@ namespace DAL.Model
                 return db.users.Where(x => x.Status == 1).ToList();
             }
         }
-        public user Get(string Id)
+        public user GetById(string Id)
         {
             using (HOMEntities db = new HOMEntities())
             {
                 return db.users.FirstOrDefault(x => x.Id == Id && x.Status == 1);
+            }
+        }
+        public List<user> GetByMobilePhone(string phone)
+        {
+            using (HOMEntities db = new HOMEntities())
+            {
+                return db.users.Where(x => x.Mobile_Phone == phone && x.Status == 1).ToList();
             }
         }
         public bool IsExist(string id)
@@ -42,15 +49,9 @@ namespace DAL.Model
             {
                 intId[i] = id[i] - '0';
             }
-
-           // char[] ch = id.ToCharArray(), check = { '1','2','1','2','1','2','1','2','1'};
-          //  int intId = int.Parse(id);
             int index = 0, sum = 0, temp = 0, subSum = 0;
             int[] arr = new int[9];
-            //for (int i = 0; i < ch.Length; i++)
-            //{
-            //    arr[index++] = (ch[i]-'0') * (check[i]-'0');
-            //}
+
             for (int i = 0; i < intId.Length; i++)
             {
                 arr[index++] = intId[i]  *check[i] ;
@@ -109,6 +110,22 @@ namespace DAL.Model
                 return user;
             }
         }
-
+        //פונ' זו מאפשרת  עדכון רשומות וגם מחיקה ע"י שינוי הסטטוס ל0
+        public user Put(user user)
+        {
+            using (HOMEntities db = new HOMEntities())
+            {
+                user newuser = db.users.FirstOrDefault(x => x.Id == user.Id);
+                newuser.Name = user.Name;
+                newuser.Phone = user.Phone;
+                newuser.Mobile_Phone = user.Mobile_Phone;
+                newuser.Address = user.Address;
+                newuser.PositiveResultDate = user.PositiveResultDate;
+                newuser.CureDate = user.CureDate;
+                newuser.Status = user.Status;
+                db.SaveChanges();
+                return user;
+            }
+        }
     }
 }

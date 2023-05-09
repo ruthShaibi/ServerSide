@@ -23,6 +23,20 @@ namespace DAL.Model
                 return db.Vaccinations.FirstOrDefault(x => x.Id == Id);
             }
         }
+        public Vaccination GetByName(string name)
+        {
+            using (HOMEntities db = new HOMEntities())
+            {
+                return db.Vaccinations.FirstOrDefault(x => x.Name == name);
+            }
+        }
+        public List<Vaccination> GetByManufacturer(string mfct)
+        {
+            using (HOMEntities db = new HOMEntities())
+            {
+                return db.Vaccinations.Where(x => x.Manufacturer == mfct).ToList();
+            }
+        }
         public bool IsExist(string name)
         {
             using (HOMEntities db = new HOMEntities())

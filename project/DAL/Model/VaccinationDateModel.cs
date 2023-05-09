@@ -16,18 +16,19 @@ namespace DAL.Model
                 return db.VaccinationDates.ToList();
             }
         }
-        public VaccinationDate GetByUserId(string Id)
+        public List<VaccinationDate> GetByUserId(string Id)
         {
             using (HOMEntities db = new HOMEntities())
             {
-                return db.VaccinationDates.FirstOrDefault(x => x.UserId == Id);
+                return db.VaccinationDates.Where(x => x.UserId == Id).ToList();
             }
         }
-        public VaccinationDate GetByVaccinationId(string Id)
+        public List<VaccinationDate> GetByVaccinationId(int Id)
         {
             using (HOMEntities db = new HOMEntities())
             {
-                return db.VaccinationDates.FirstOrDefault(x => x.VaccinationId == int.Parse(Id));
+                
+                return db.VaccinationDates.Where(x => x.VaccinationId == Id).ToList();
             }
         }
         public bool IsValidNumber(int number, string id)

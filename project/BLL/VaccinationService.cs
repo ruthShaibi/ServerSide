@@ -19,6 +19,14 @@ namespace BLL
         {
             return Convert.VaccinationConvert.Convert(model.Get(id));
         }
+        public DTO.VaccinationDTO GetByName(string name)
+        {
+            return Convert.VaccinationConvert.Convert(model.GetByName(name));
+        }
+        public List<DTO.VaccinationDTO> GetByManufacturer(string mfct)
+        {
+            return Convert.VaccinationConvert.Convert(model.GetByManufacturer(mfct));
+        }
         public DTO.VaccinationDTO Post(VaccinationDTO VaccinationDTO)
         {
             return Convert.VaccinationConvert.Convert(model.Post(Convert.VaccinationConvert.Convert(VaccinationDTO)));
