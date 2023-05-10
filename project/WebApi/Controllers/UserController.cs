@@ -10,6 +10,7 @@ namespace WebApi.Controllers
     public class UserController:ApiController
     {
         BLL.UserService service= new BLL.UserService();
+        //פונ' שליפה
         [HttpGet]
        [Route("~/api/user/GetUser")]
         public List<DTO.UserDTO> Get()
@@ -17,18 +18,21 @@ namespace WebApi.Controllers
             return service.Get();
         }
         
+        //שליפה לפי ת.ז
         [Route("~/api/user/GetById/{id}")]
         public DTO.UserDTO GetById(string id)
         {
             return service.GetById(id);
         }
+
+        //שליפה לפי טלפון נייד
         [Route("~/api/user/GetByMobilePhone/{phone}")]
         public List<DTO.UserDTO> GetByMobilePhone(string phone)
         {
             return service.GetByMobilePhone(phone);
         }
 
-
+        //הוספה
         [HttpPost]
         public IHttpActionResult Post(UserDTO userDTO)
         {
@@ -44,6 +48,7 @@ namespace WebApi.Controllers
             }
 
         }
+        //עדכון ומחיקה ע"י שינוי סטטוס ל0
         [HttpPut]
 
         [Route("~/api/user/Put")]

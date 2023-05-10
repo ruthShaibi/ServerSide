@@ -18,6 +18,7 @@ namespace DAL.Model
                 return db.Vaccinations.Where(x=>x.Status==1).ToList();
             }
         }
+
         public Vaccination Get(int Id)
         {
             using (HOMEntities db = new HOMEntities())
@@ -39,19 +40,11 @@ namespace DAL.Model
                 return db.Vaccinations.Where(x => x.Manufacturer == mfct).ToList();
             }
         }
-        public bool IsExist(string name)
-        {
-            using (HOMEntities db = new HOMEntities())
-            {
-                return db.Vaccinations.Any(x => x.Name == name);
-            }
-        }
+
         public Vaccination Post(Vaccination Vaccination)
         {
             using (HOMEntities db = new HOMEntities())
             {
-                if (IsExist(Vaccination.Name))
-                    return null;
                 Vaccination = db.Vaccinations.Add(Vaccination);
                 try
                 {
@@ -64,7 +57,6 @@ namespace DAL.Model
                 }
             }
         }
-        //פןנ' זו מעדכנת חיסון וגם מוחקת ע"י שינוי סטטוס ל0
         public Vaccination Put(Vaccination vaccination)
         {
             using (HOMEntities db = new HOMEntities())

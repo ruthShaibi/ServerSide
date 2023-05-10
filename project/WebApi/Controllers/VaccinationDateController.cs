@@ -11,22 +11,25 @@ namespace WebApi.Controllers
     {
 
         BLL.VaccinationDateService service = new BLL.VaccinationDateService();
+        //שליפה
         [HttpGet]
         public List<DTO.VaccinationDateDTO> Get()
         {
             return service.Get();
         }
+        //שליפה לפי ת.ז
         [Route("~/api/VaccinationDate/GetByUserId/{id}")]
         public List<DTO.VaccinationDateDTO> GetByUserId(string id)
         {
             return service.GetByUserId(id);
         }
+        //שליפה לפי מזהה חיסון
         [Route("~/api/VaccinationDate/GetByVaccinationId/{id}")]
         public List<DTO.VaccinationDateDTO> GetByVaccinationId(int id)
         {
             return service.GetByVaccinationId(id);
         }
-
+        //הוספה
         [HttpPost]
         public IHttpActionResult Post(VaccinationDateDTO VaccinationDateDTO)
         {
@@ -41,9 +44,9 @@ namespace WebApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        //עידכון
         [HttpPut]
-
-
         public DTO.VaccinationDateDTO Put(VaccinationDateDTO VaccinationDateDTO)
         {
             return service.Put(VaccinationDateDTO);

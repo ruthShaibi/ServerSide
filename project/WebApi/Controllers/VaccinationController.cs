@@ -15,20 +15,27 @@ namespace WebApi.Controllers
         {
             return service.Get();
         }
+        //פונ' שליפה לפי מזהה
         public DTO.VaccinationDTO Get(int id)
         {
             return service.Get(id);
         }
+
+        //פונ' שליפה לפי שם
         [Route("~/api/Vaccination/GetByName/{name}")]
         public DTO.VaccinationDTO GetByName(string name)
         {
             return service.GetByName(name);
         }
+
+        //פונ' שליפה לפי יצרן
         [Route("~/api/Vaccination/GetByManufacturer/{mfct}")]
         public List<DTO.VaccinationDTO> GetByManufacturer(string mfct)
         {
             return service.GetByManufacturer(mfct);
         }
+
+        // פונ' הוספה
         [HttpPost]
         public IHttpActionResult Post(VaccinationDTO VaccinationDTO)
         {
@@ -43,8 +50,9 @@ namespace WebApi.Controllers
                 return BadRequest(e.Message);
             }
         }
-        [HttpPut]
 
+        //פןנ' זו מעדכנת חיסון וגם מוחקת ע"י שינוי סטטוס ל0
+        [HttpPut]
         [Route("~/api/Vaccination/Put")]
         public DTO.VaccinationDTO Put(VaccinationDTO Vaccination)
         {
