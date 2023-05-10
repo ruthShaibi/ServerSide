@@ -27,15 +27,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Vaccination">
-      <EntityTypeMapping TypeName="HOMModel.Vaccination">
-        <MappingFragment StoreEntitySet="Vaccination">
-          <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="VaccinationDate">
       <EntityTypeMapping TypeName="HOMModel.VaccinationDate">
         <MappingFragment StoreEntitySet="VaccinationDate">
@@ -43,6 +34,16 @@
           <ScalarProperty Name="ReciveDate" ColumnName="ReciveDate" />
           <ScalarProperty Name="VaccinationId" ColumnName="VaccinationId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vaccination">
+      <EntityTypeMapping TypeName="HOMModel.Vaccination">
+        <MappingFragment StoreEntitySet="Vaccination">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

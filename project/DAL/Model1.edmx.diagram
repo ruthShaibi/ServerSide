@@ -7,9 +7,9 @@
       <Diagram DiagramId="61dda631c31547d69a45db9f6332ea11" Name="Diagram1">
         <EntityTypeShape EntityType="HOMModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="4.75" />
         <EntityTypeShape EntityType="HOMModel.user" Width="1.5" PointX="0.75" PointY="5.875" />
-        <EntityTypeShape EntityType="HOMModel.Vaccination" Width="1.5" PointX="0.75" PointY="1.25" />
         <EntityTypeShape EntityType="HOMModel.VaccinationDate" Width="1.5" PointX="3" PointY="1" />
         <AssociationConnector Association="HOMModel.FK_VaccinationDate_user" />
+        <EntityTypeShape EntityType="HOMModel.Vaccination" Width="1.5" PointX="0.75" PointY="1.25" />
         <AssociationConnector Association="HOMModel.FK_VaccinationDate_Vaccination" />
       </Diagram>
     </edmx:Diagrams>

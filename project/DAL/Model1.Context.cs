@@ -27,7 +27,7 @@ namespace DAL
     
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<user> users { get; set; }
-        public virtual DbSet<Vaccination> Vaccinations { get; set; }
         public virtual DbSet<VaccinationDate> VaccinationDates { get; set; }
+        public virtual DbSet<Vaccination> Vaccinations { get; set; }
     }
 }

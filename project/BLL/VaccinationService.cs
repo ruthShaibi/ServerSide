@@ -31,5 +31,9 @@ namespace BLL
         {
             return Convert.VaccinationConvert.Convert(model.Post(Convert.VaccinationConvert.Convert(VaccinationDTO)));
         }
+        public DTO.VaccinationDTO Put(VaccinationDTO VaccinationDTO)
+        {
+            return Convert.VaccinationConvert.Convert(model.Put(Convert.VaccinationConvert.Convert(VaccinationDTO)));
+        }
     }
 }

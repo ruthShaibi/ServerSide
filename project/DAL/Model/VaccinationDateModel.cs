@@ -66,9 +66,38 @@ namespace DAL.Model
             {
                 if (!Validation(VaccinationDate))
                     return null;
-                db.SaveChanges();
-                return VaccinationDate;
+                try
+                {
+                    db.SaveChanges();
+                    return VaccinationDate;
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+
             }
+        }
+        public VaccinationDate Put(VaccinationDate VaccinationDate)
+        {
+            using (HOMEntities db = new HOMEntities())
+            {
+                VaccinationDate newVaccinationDate = db.VaccinationDates.FirstOrDefault(x => x.Id == VaccinationDate.Id);
+                newVaccinationDate.VaccinationId = VaccinationDate.VaccinationId;
+                newVaccinationDate.ReciveDate = VaccinationDate.ReciveDate;
+                newVaccinationDate.Number = VaccinationDate.Number;
+                try
+                {
+                    db.SaveChanges();
+                    return VaccinationDate;
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+
+            }
+
         }
     }
 }

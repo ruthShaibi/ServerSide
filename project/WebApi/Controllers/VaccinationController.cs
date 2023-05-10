@@ -43,5 +43,12 @@ namespace WebApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+        [HttpPut]
+
+        [Route("~/api/Vaccination/Put")]
+        public DTO.VaccinationDTO Put(VaccinationDTO Vaccination)
+        {
+            return service.Put(Vaccination);
+        }
     }
 }

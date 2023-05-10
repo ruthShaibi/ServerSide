@@ -36,6 +36,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nchar" MaxLength="15" Nullable="false" />
           <Property Name="Manufacturer" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="Status" Type="int" />
         </EntityType>
         <EntityType Name="VaccinationDate">
           <Key>
@@ -92,12 +93,12 @@
         <EntityContainer Name="HOMEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="sysdiagrams" EntityType="HOMModel.sysdiagrams" />
           <EntitySet Name="user" EntityType="HOMModel.user" />
-          <EntitySet Name="Vaccination" EntityType="HOMModel.Vaccination" />
           <EntitySet Name="VaccinationDate" EntityType="HOMModel.VaccinationDate" />
           <AssociationSet Name="FK_VaccinationDate_user" Association="HOMModel.FK_VaccinationDate_user">
             <End Role="user" EntitySet="user" />
             <End Role="VaccinationDate" EntitySet="VaccinationDate" />
           </AssociationSet>
+          <EntitySet Name="Vaccination" EntityType="HOMModel.Vaccination" />
           <AssociationSet Name="FK_VaccinationDate_Vaccination" Association="HOMModel.FK_VaccinationDate_Vaccination">
             <End Role="Vaccination" EntitySet="Vaccination" />
             <End Role="VaccinationDate" EntitySet="VaccinationDate" />
@@ -128,15 +129,6 @@
           <Property Name="Status" Type="Int32" />
           <NavigationProperty Name="VaccinationDate" Relationship="HOMModel.FK_VaccinationDate_user" FromRole="user" ToRole="VaccinationDate" />
         </EntityType>
-        <EntityType Name="Vaccination">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
-          <Property Name="Manufacturer" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="VaccinationDate" Relationship="HOMModel.FK_VaccinationDate_Vaccination" FromRole="Vaccination" ToRole="VaccinationDate" />
-        </EntityType>
         <EntityType Name="VaccinationDate">
           <Key>
             <PropertyRef Name="Id" />
@@ -161,6 +153,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Vaccination">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Manufacturer" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="VaccinationDate" Relationship="HOMModel.FK_VaccinationDate_Vaccination" FromRole="Vaccination" ToRole="VaccinationDate" />
+        </EntityType>
         <Association Name="FK_VaccinationDate_Vaccination">
           <End Type="HOMModel.Vaccination" Role="Vaccination" Multiplicity="1" />
           <End Type="HOMModel.VaccinationDate" Role="VaccinationDate" Multiplicity="*" />
@@ -205,15 +207,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Vaccination">
-            <EntityTypeMapping TypeName="HOMModel.Vaccination">
-              <MappingFragment StoreEntitySet="Vaccination">
-                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VaccinationDate">
             <EntityTypeMapping TypeName="HOMModel.VaccinationDate">
               <MappingFragment StoreEntitySet="VaccinationDate">
@@ -221,6 +214,16 @@
                 <ScalarProperty Name="ReciveDate" ColumnName="ReciveDate" />
                 <ScalarProperty Name="VaccinationId" ColumnName="VaccinationId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vaccination">
+            <EntityTypeMapping TypeName="HOMModel.Vaccination">
+              <MappingFragment StoreEntitySet="Vaccination">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

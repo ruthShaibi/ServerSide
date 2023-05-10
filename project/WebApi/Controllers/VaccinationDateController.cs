@@ -41,5 +41,12 @@ namespace WebApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+        [HttpPut]
+
+
+        public DTO.VaccinationDateDTO Put(VaccinationDateDTO VaccinationDateDTO)
+        {
+            return service.Put(VaccinationDateDTO);
+        }
     }
 }

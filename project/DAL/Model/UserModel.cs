@@ -37,14 +37,14 @@ namespace DAL.Model
         {
             using (HOMEntities db = new HOMEntities())
             {
-                if(db.users.Any(x => x.Id == id))
-                return false;
+                if (db.users.Any(x => x.Id == id))
+                    return false;
                 return true;
             }
         }
         public bool IsValidId(string id)
         {
-            int[] intId = new int[9], check = {1,2,1,2,1,2,1,2,1};
+            int[] intId = new int[9], check = { 1, 2, 1, 2, 1, 2, 1, 2, 1 };
             for (int i = 0; i < id.Length; i++)
             {
                 intId[i] = id[i] - '0';
@@ -54,7 +54,7 @@ namespace DAL.Model
 
             for (int i = 0; i < intId.Length; i++)
             {
-                arr[index++] = intId[i]  *check[i] ;
+                arr[index++] = intId[i] * check[i];
             }
 
             for (int j = 0; j < arr.Length; j++)
@@ -75,7 +75,7 @@ namespace DAL.Model
                     sum += arr[j];
                 }
             }
-            if (sum % 10 != 0 || sum==0)
+            if (sum % 10 != 0 || sum == 0)
                 return false;
             return true;
 
@@ -104,10 +104,19 @@ namespace DAL.Model
             {
                 user.Status = 1;
                 if (!Validation(user)) return null;
-                
+
                 user = db.users.Add(user);
-                db.SaveChanges();
-                return user;
+
+                try
+                {
+                    db.SaveChanges();
+                    return user;
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+
             }
         }
         //פונ' זו מאפשרת  עדכון רשומות וגם מחיקה ע"י שינוי הסטטוס ל0
@@ -123,8 +132,15 @@ namespace DAL.Model
                 newuser.PositiveResultDate = user.PositiveResultDate;
                 newuser.CureDate = user.CureDate;
                 newuser.Status = user.Status;
-                db.SaveChanges();
-                return user;
+                try
+                {
+                    db.SaveChanges();
+                    return user;
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
             }
         }
     }
