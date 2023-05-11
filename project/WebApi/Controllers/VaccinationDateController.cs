@@ -13,21 +13,51 @@ namespace WebApi.Controllers
         BLL.VaccinationDateService service = new BLL.VaccinationDateService();
         //שליפה
         [HttpGet]
-        public List<DTO.VaccinationDateDTO> Get()
+        public IHttpActionResult Get()
         {
-            return service.Get();
+            try
+            {
+                var vacDate = service.Get();
+
+                return Created("התקבלו כל ביצועי החיסונים", vacDate);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+             
         }
         //שליפה לפי ת.ז
         [Route("~/api/VaccinationDate/GetByUserId/{id}")]
-        public List<DTO.VaccinationDateDTO> GetByUserId(string id)
+        public IHttpActionResult GetByUserId(string id)
         {
-            return service.GetByUserId(id);
+            try
+            {
+                var vacDate = service.GetByUserId(id);
+
+                return Created("ביצוע חיסון לפי ת.ז מבוטח", vacDate);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+             
         }
         //שליפה לפי מזהה חיסון
         [Route("~/api/VaccinationDate/GetByVaccinationId/{id}")]
-        public List<DTO.VaccinationDateDTO> GetByVaccinationId(int id)
+        public IHttpActionResult GetByVaccinationId(int id)
         {
-            return service.GetByVaccinationId(id);
+            try
+            {
+                var vacDate =service.GetByVaccinationId(id);
+
+                return Created("התקבלו ביצועי חיסונים לםי מזהה חיסון", vacDate);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+             
         }
         //הוספה
         [HttpPost]
@@ -37,7 +67,7 @@ namespace WebApi.Controllers
             {
                 var vacDate = service.Post(VaccinationDateDTO);
 
-                return Created(" מועד החיסון התווסף", vacDate);
+                return Created(" ביצוע החיסון התווסף", vacDate);
             }
             catch (Exception e)
             {
@@ -47,9 +77,19 @@ namespace WebApi.Controllers
 
         //עידכון
         [HttpPut]
-        public DTO.VaccinationDateDTO Put(VaccinationDateDTO VaccinationDateDTO)
+        public IHttpActionResult Put(VaccinationDateDTO VaccinationDateDTO)
         {
-            return service.Put(VaccinationDateDTO);
+            try
+            {
+                var vacDate = service.Put(VaccinationDateDTO);
+
+                return Created("ביצוע חיסון עודכן", vacDate);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+             
         }
     }
 }

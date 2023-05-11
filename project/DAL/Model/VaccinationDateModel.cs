@@ -27,7 +27,7 @@ namespace DAL.Model
         {
             using (HOMEntities db = new HOMEntities())
             {
-                
+
                 return db.VaccinationDates.Where(x => x.VaccinationId == Id).ToList();
             }
         }
@@ -38,8 +38,18 @@ namespace DAL.Model
             {
                 if (number > 4)
                     return false;
-                if (db.VaccinationDates.Where(x => x.UserId == id).Any(x => x.Number > number))
-                    return false; else return true;
+
+                List<VaccinationDate> list = db.VaccinationDates.Where(x => x.UserId == id).ToList();
+
+                if (list.Count()!=0)
+                {
+                    if (list.Any(x => x.Number >= number))
+                        return false;
+                    if (list.Max(x => x.Number) == number - 1)
+                        return true;
+                    else return false;
+                }               
+                 return true;
 
             }
         }
@@ -52,13 +62,13 @@ namespace DAL.Model
         }
         public bool IsValidDate(DateTime date)
         {
-            return date<= DateTime.Now;    
+            return date <= DateTime.Now;
         }
 
         public bool Validation(VaccinationDate VaccinationDate)
         {
             return IsValidDate(VaccinationDate.ReciveDate) && IsValidUserAndVacId(VaccinationDate.UserId, VaccinationDate.VaccinationId) &&
-                IsValidNumber((int)VaccinationDate.Number,VaccinationDate.UserId);
+                IsValidNumber((int)VaccinationDate.Number, VaccinationDate.UserId);
         }
         public VaccinationDate Post(VaccinationDate VaccinationDate)
         {
@@ -66,6 +76,7 @@ namespace DAL.Model
             {
                 if (!Validation(VaccinationDate))
                     return null;
+                VaccinationDate = db.VaccinationDates.Add(VaccinationDate);
                 try
                 {
                     db.SaveChanges();
@@ -82,10 +93,12 @@ namespace DAL.Model
         {
             using (HOMEntities db = new HOMEntities())
             {
-                VaccinationDate newVaccinationDate = db.VaccinationDates.FirstOrDefault(x => x.Id == VaccinationDate.Id);
+                VaccinationDate newVaccinationDate = db.VaccinationDates.FirstOrDefault(x => x.Id == VaccinationDate.Id );
                 newVaccinationDate.VaccinationId = VaccinationDate.VaccinationId;
                 newVaccinationDate.ReciveDate = VaccinationDate.ReciveDate;
                 newVaccinationDate.Number = VaccinationDate.Number;
+
+                if (!Validation(newVaccinationDate)) return null;
                 try
                 {
                     db.SaveChanges();

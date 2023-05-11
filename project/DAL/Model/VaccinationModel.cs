@@ -15,7 +15,7 @@ namespace DAL.Model
         {
             using (HOMEntities db = new HOMEntities())
             {
-                return db.Vaccinations.Where(x=>x.Status==1).ToList();
+                return db.Vaccinations.Where(x => x.Status == 1).ToList();
             }
         }
 
@@ -30,14 +30,14 @@ namespace DAL.Model
         {
             using (HOMEntities db = new HOMEntities())
             {
-                return db.Vaccinations.FirstOrDefault(x => x.Name == name);
+                return db.Vaccinations.FirstOrDefault(x => x.Name == name && x.Status == 1);
             }
         }
         public List<Vaccination> GetByManufacturer(string mfct)
         {
             using (HOMEntities db = new HOMEntities())
             {
-                return db.Vaccinations.Where(x => x.Manufacturer == mfct).ToList();
+                return db.Vaccinations.Where(x => x.Manufacturer.Contains(mfct) && x.Status == 1).ToList();
             }
         }
 
@@ -64,7 +64,7 @@ namespace DAL.Model
                 Vaccination newVaccination = db.Vaccinations.FirstOrDefault(x => x.Id == vaccination.Id);
                 newVaccination.Name = vaccination.Name;
                 newVaccination.Manufacturer = vaccination.Manufacturer;
-                newVaccination.Status= vaccination.Status;
+                newVaccination.Status = vaccination.Status;
                 try
                 {
                     db.SaveChanges();

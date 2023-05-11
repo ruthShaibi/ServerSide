@@ -11,32 +11,74 @@ namespace WebApi.Controllers
     {
         BLL.VaccinationService service = new BLL.VaccinationService();
         [HttpGet]
-        public List<DTO.VaccinationDTO> Get()
+        public IHttpActionResult Get()
         {
-            return service.Get();
+            try
+            {
+                var vac = service.Get();
+
+                return Created("כל החיסונים התקבלו" , vac);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
         //פונ' שליפה לפי מזהה
-        public DTO.VaccinationDTO Get(int id)
+        [Route("~/api/Vaccination/GetById/{id}")]
+
+        public IHttpActionResult Get(int id)
         {
-            return service.Get(id);
+            try
+            {
+                var vac =service.Get(id);
+
+                return Created("התקבל חיסון לפי מזהה חיסון", vac);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+             
         }
 
         //פונ' שליפה לפי שם
         [Route("~/api/Vaccination/GetByName/{name}")]
-        public DTO.VaccinationDTO GetByName(string name)
+        public IHttpActionResult GetByName(string name)
         {
-            return service.GetByName(name);
+            try
+            {
+                var vac = service.GetByName(name);
+
+                return Created("התקבל חיסון לפי שם", vac);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+             
         }
 
         //פונ' שליפה לפי יצרן
         [Route("~/api/Vaccination/GetByManufacturer/{mfct}")]
-        public List<DTO.VaccinationDTO> GetByManufacturer(string mfct)
+        public IHttpActionResult GetByManufacturer(string mfct)
         {
-            return service.GetByManufacturer(mfct);
+            try
+            {
+                var vac = service.GetByManufacturer(mfct);
+
+                return Created("התקבל חיסון לפי יצרן", vac);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+             
         }
 
         // פונ' הוספה
         [HttpPost]
+        [Route("~/api/Vaccination/Post")]
         public IHttpActionResult Post(VaccinationDTO VaccinationDTO)
         {
             try
@@ -54,9 +96,19 @@ namespace WebApi.Controllers
         //פןנ' זו מעדכנת חיסון וגם מוחקת ע"י שינוי סטטוס ל0
         [HttpPut]
         [Route("~/api/Vaccination/Put")]
-        public DTO.VaccinationDTO Put(VaccinationDTO Vaccination)
+        public IHttpActionResult Put(VaccinationDTO Vaccination)
         {
-            return service.Put(Vaccination);
+            try
+            {
+                var vac = service.Put(Vaccination);
+
+                return Created("חיסון עודכן", vac);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+             
         }
     }
 }

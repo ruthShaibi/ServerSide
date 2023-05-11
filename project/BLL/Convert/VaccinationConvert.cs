@@ -20,6 +20,8 @@ namespace BLL.Convert
                 Id = obj.Id,
                 Name = obj.Name,
                 Manufacturer= obj.Manufacturer,
+                Status = obj.Status,
+
             };
 
         }
@@ -34,7 +36,8 @@ namespace BLL.Convert
             {
                 Id = obj.Id,
                 Name = obj.Name,
-                Manufacturer = obj.Manufacturer
+                Manufacturer = obj.Manufacturer,
+                Status=obj.Status,
             };
         }
 

@@ -49,7 +49,7 @@ namespace DAL.Model
             {
                 intId[i] = id[i] - '0';
             }
-            int index = 0, sum = 0, temp = 0, subSum = 0;
+            int index = 0, sum = 0, subSum = 0,temp=0;
             int[] arr = new int[9];
 
             for (int i = 0; i < intId.Length; i++)
@@ -82,11 +82,15 @@ namespace DAL.Model
         }
         public bool IsValidName(string name)
         {
-            return !(name.Count() < 5);
+            return name.Count() > 5;
+        }
+        public bool IsValidMObilePhone(string number)
+        {
+            return number.Count() == 10 && number[0]=='0' && number[1]=='5';
         }
         public bool IsValidPhone(string number)
         {
-            return !(number.Count() < 10 || number.Count() > 10);
+            return number.Count()>=6 || number.Count() <=9 ;
         }
         public bool IsValidDate(DateTime date)
         {
@@ -94,8 +98,10 @@ namespace DAL.Model
         }
         public bool Validation(user user)
         {
-            return IsValidPhone(user.Phone) && IsValidPhone(user.Mobile_Phone) &&
-               IsValidDate(user.Birth_Date) && IsValidId(user.Id) && IsExist(user.Id);
+            DateTime positive = (DateTime)user.PositiveResultDate;
+            DateTime cure = (DateTime)user.CureDate;
+            return IsValidPhone(user.Phone) && IsValidMObilePhone(user.Mobile_Phone) &&
+               IsValidDate(user.Birth_Date) && IsValidId(user.Id) && IsValidName(user.Name)&& IsValidDate(positive) && IsValidDate(cure);
         }
 
         public user Post(user user)
@@ -132,6 +138,7 @@ namespace DAL.Model
                 newuser.PositiveResultDate = user.PositiveResultDate;
                 newuser.CureDate = user.CureDate;
                 newuser.Status = user.Status;
+                if (!Validation(newuser)) return null;
                 try
                 {
                     db.SaveChanges();

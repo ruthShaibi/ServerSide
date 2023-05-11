@@ -31,7 +31,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nchar" MaxLength="15" Nullable="false" />
     <Property Name="Manufacturer" Type="nchar" MaxLength="15" Nullable="false" />
-    <Property Name="Status" Type="int" />
+    <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="VaccinationDate">
     <Key>

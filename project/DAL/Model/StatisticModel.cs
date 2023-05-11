@@ -16,7 +16,7 @@ namespace DAL.Model
                 List <user> users = new List <user> ();
                 users=db.users.ToList ();
                 foreach (user user in users) {
-                    if (db.VaccinationDates.FirstOrDefault(x => x.UserId == user.Id) != null)
+                    if (!(db.VaccinationDates.Any(x => x.UserId == user.Id)))
                         count++;
                 }
                 return count;

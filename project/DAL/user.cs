@@ -11,7 +11,9 @@ namespace DAL
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+
     public partial class user
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +21,6 @@ namespace DAL
         {
             this.VaccinationDate = new HashSet<VaccinationDate>();
         }
-    
         public string Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
